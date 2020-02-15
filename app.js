@@ -4,12 +4,12 @@ const app = express();
 
 
 // EJS Middleware
-app.use(expressLayouts());
+app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 //ROUTES
-app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
+app.use('/', require('./routes/index.js'));
+app.use('/users', require('./routes/users.js'));
 
 
 const PORT = process.env.PORT || 5000;
