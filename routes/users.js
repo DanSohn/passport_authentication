@@ -73,8 +73,25 @@ router.post('/register', (req, res) => {
                         email: email,
                         password: password
                     });
-                    console.log(newUser);
-                    res.send('hello');
+
+                    // Hash Password
+                    // generate a salt to create a hash, using genSalt
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(newUser.password, salt, (err, hash) => {
+                            if(err){
+                                throw err;
+                            }
+                            // sets the password to hashed password
+                            newUser.password = hash;
+                            // saves the user to mongo
+                            // returns a promise
+                            newUser.save()
+                                .then(user => {
+                                    res.redirect('/login.ejs');
+                                })
+                                .catch(err => console.log(err))
+                        })
+                    })
                 }
             })
     }
