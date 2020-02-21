@@ -38,6 +38,18 @@ router.post('/register', (req, res) => {
         errors.push({msg: "Password must be at least 6 characters"});
     }
 
+    if(errors.length > 0){
+        // pass in variables and errors
+        res.render('register', {
+            errors,
+            name,
+            email,
+            password,
+            password2
+        })
+    }else{
+        res.send('pass');
+    }
 });
 
 module.exports = router;
