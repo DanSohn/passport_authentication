@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+// this is for encrypting passwords
+const bcrypt = require('bcryptjs');
+// User model
+const User = require('../models/User');
 
 // Login Page
 router.get('/login', (req,res) =>
@@ -48,7 +52,31 @@ router.post('/register', (req, res) => {
             password2
         })
     }else{
-        res.send('pass');
+        //validation pass
+        // this returns a promise so you use .then
+        User.findOne({email: email})
+            .then(user => {
+                if(user){
+                    // User exists
+                    errors.push({msg: "Email already in use"});
+                    res.render('register', {
+                        errors,
+                        name,
+                        email,
+                        password,
+                        password2
+                    })
+                }else{
+                    // user doesn't exist, so add a new user
+                    const newUser = new User({
+                        name: name,
+                        email: email,
+                        password: password
+                    });
+                    console.log(newUser);
+                    res.send('hello');
+                }
+            })
     }
 });
 
