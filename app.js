@@ -5,12 +5,16 @@ const mongoose = require('mongoose');
 const app = express();
 
 // DB Config
-const db = require('./config/keys').MongoURI;
+const db = require('./node_modules/keys').MongoURI;
 
 // Connect to Mongo
 mongoose.connect(db, {useNewUrlParser: true})
     .then(() => console.log("MongoDB Connected"))
     .catch(err => console.log(err));
+
+// Bodyparser - get data from form with request.body
+app.use(express.urlencoded({extended: false}));
+
 // EJS Middleware
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
