@@ -87,7 +87,7 @@ router.post('/register', (req, res) => {
                             // returns a promise
                             newUser.save()
                                 .then(user => {
-                                    res.redirect('/login.ejs');
+                                    res.redirect('/users/login.ejs');
                                 })
                                 .catch(err => console.log(err))
                         })
