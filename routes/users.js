@@ -103,7 +103,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/dashboard',
-        failureRedirect: '/userse/login',
+        failureRedirect: '/users/login',
         failureFlash: true
     })(req, res, next);
 });
@@ -112,7 +112,7 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
    // just call req.logout using passport middleware
    req.logout();
-   // send flash maessage using req.flash
+   // send flash message using req.flash
     req.flash('success_msg', 'You are logged out');
     res.redirect('/users/login'); // redirect to the login lage
 });
