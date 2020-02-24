@@ -87,6 +87,7 @@ router.post('/register', (req, res) => {
                             // returns a promise
                             newUser.save()
                                 .then(user => {
+                                    req.flash('success_msg', 'You are now registered and can log in');
                                     res.redirect('/users/login.ejs');
                                 })
                                 .catch(err => console.log(err))
