@@ -108,4 +108,13 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
+// Logout Handle
+router.get('/logout', (req, res) => {
+   // just call req.logout using passport middleware
+   req.logout();
+   // send flash maessage using req.flash
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/users/login'); // redirect to the login lage
+});
+
 module.exports = router;
